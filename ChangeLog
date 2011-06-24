@@ -1,0 +1,174 @@
+Modifiche phase1
+----------------
+
+****************
+* /phase1/src/ *
+****************
+________________________________________
+
+PCB.C : new_pcb.c (<) diff old_pcb.c (>)
+________________________________________
+
+12d11
+< #include <pcb.e>
+33c32
+< HIDDEN void newPcb(pcb_t *p)
+---
+> void newPcb(pcb_t *p)
+53c52
+< 	for(i=0;i<NREG;i++)
+---
+> 	for(i=0;i<29;i++)
+55,65d53
+< 	
+< 	/* Altri campi */
+< 	/* process id */
+< 	p->p_pid = 0;
+< 	
+< 	/* CPU_TIME of process */
+< 	p->p_cpu_time = 0;
+< 	
+< 	/* Exception State Vector */
+< 	for(i=0;i<3;i++)
+< 		p->ExStVec[i] = 0;
+232,251d219
+<   * @brief Aggiorna il puntatore del padre al pcb figlio.
+<   * @param parent : puntatore al pcb genitore
+<   * @param child : puntatore al pcb figlio.
+<   * @return void.
+<  */
+< HIDDEN void updateParent(pcb_t *parent, pcb_t *child)
+< {
+< 	/* Controlla se il figlio da rimuovere e' l'unico della lista 
+< 	   se lo e', aggiorna il puntatore del padre reinizializzandolo
+< 	   altrimenti lo aggiorna facendolo puntare al fratello del figlio rimosso */
+< 	if(list_empty(&(child->p_sib)))
+< 		INIT_LIST_HEAD(&parent->p_child);
+< 	else
+< 	{
+< 		parent->p_child.next=child->p_sib.prev; /* DA CONTROLLARE. P_CHILD E' SE STESSO NEGLI ALBERI, E P_CHILD.NEXT??? */
+< 		parent->p_child.prev=child->p_sib.next;
+< 	}
+< }
+< 
+< /**
+281c249
+< 	pcb_t *child;
+---
+> 	pcb_t *p;
+289,292c257
+< 		child=container_of(parent->p_child.next, pcb_t, p_sib);
+< 
+< 		/* Aggiorna il puntatore del padre al figlio */
+< 		updateParent(parent, child);
+---
+> 		p=container_of(parent->p_child.next, pcb_t, p_sib);
+295,296c260,261
+< 		list_del(&(child->p_sib));
+< 		child->p_prnt=NULL;
+---
+> 		list_del(&(p->p_sib));
+> 		p->p_prnt=NULL;
+298c263
+< 		return child;
+---
+> 		return p;
+309,310d273
+< 	pcb_t *parent;
+< 
+316,321d278
+< 		/* Preleva il genitore del figlio da rimuovere */
+< 		parent=container_of(&child->p_prnt->p_sib, pcb_t, p_sib);
+< 
+< 		/* Aggiorna il puntatore del padre al figlio */
+< 		updateParent(parent, child);
+________________________________________
+
+ASL.C : new_asl.c (<) diff old_asl.c (>)
+________________________________________
+
+158d157
+< 			p->p_semAdd = NULL;
+174d172
+< 	pcb_t *p_aux;
+179,186d176
+< 		{
+< 			p_aux = outProcQ(&s->s_procQ, p);
+< 			p_aux->p_semAdd = NULL;
+< 			if(emptyProcQ(&s->s_procQ))
+< 			{
+< 				list_del(&s->s_next);
+< 				freeSem(s);
+< 			}
+188,190c178
+< 			return p_aux;
+< 		}
+< 		
+---
+> 			return(outProcQ(&s->s_procQ,p));
+
+*************
+* /include/ *
+*************
+__________________________________________________________
+
+UMPSTYPES.H : new_uMPStypes.h (<) diff old_uMPStypes.h (>)
+__________________________________________________________
+
+3d2
+< #include "const.h"
+114,115d112
+< typedef U32 cpu_t;
+< 
+______________________________________________
+
+CONST.H : new_const.h (<) diff old_const.h (>)
+______________________________________________
+
+126,136d128
+< /*Device register words*/
+< #define DEV_REG_STATUS        0x0
+< #define DEV_REG_COMMAND       0x4
+< #define DEV_REG_DATA0         0x8
+< #define DEV_REG_DATA1         0xC
+< 
+< #define TERM_R_STATUS     0x0
+< #define TERM_R_COMMAND    0x4
+< #define TERM_T_STATUS     0x8
+< #define TERM_T_COMMAND    0xC
+< 
+304,305d295
+< #define NREG 29
+< 
+________________________________________________
+
+TYPES10.H : new_types10.h (<) diff old_types10.h
+________________________________________________
+
+22,45c22
+< 	/* process id */
+< 	int p_pid;
+< 	
+< 	/* CPU_TIME of process */
+< 	cpu_t p_cpu_time;
+< 	
+< 	/* Exception State Vector */
+< 	/* 0 = TLB
+< 	   1 = PGMTRAP
+< 	   2 = SYSBP */
+< 	int ExStVec[3];
+< 	
+< 	/* TLB */
+< 	state_t *tlbState_old;
+< 	state_t *tlbState_new;
+< 	
+< 	/* PgmTrap */
+< 	state_t *pgmtrapState_old;
+< 	state_t *pgmtrapState_new;
+< 	
+< 	/* SysBP */
+< 	state_t *sysbpState_old;
+< 	state_t *sysbpState_new;
+< 	
+---
+> 	/* ... */

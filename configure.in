@@ -1,0 +1,26 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.64])
+AC_INIT([Kaya 2010], [1.37], [ferrari@cs.unibo.it - iadarola@cs.unibo.it])
+AC_CONFIG_SRCDIR([phase2/src/p2test.0.1.c])
+AM_INIT_AUTOMAKE
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_MAKE_SET
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_INLINE
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile
+                 phase1/src/Makefile
+                 phase2/src/Makefile])
+AC_OUTPUT

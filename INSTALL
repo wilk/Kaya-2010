@@ -1,0 +1,47 @@
+#########################################################################################
+#				    Bugiardino 2.0					#
+# ------------------------------------------------------------------------------------- #
+# 				Istruzioni per l'uso					#
+#########################################################################################
+#											#
+# Per decomprimere l'archivio di kaya2010 ed estrarre i file da compilare,		#
+# è necessario avviare il seguente comando :						#
+#											#
+#	$ tar -xvf kaya2010.tar.gz							#
+#											#
+# Per creare il Makefile apposito è necessario posizionarsi nella cartella kaya2010	#
+# appena creata e avviare il seguente comando :						#
+#											#
+# 	$ ./configure									#
+#											#
+# Per compilare il codice è necessario avviare il seguente comando :			#
+#											#
+#	$ make										#
+#											#
+# Per avviare il programma digitare da terminale il seguente comando :			#
+#											#
+#	$ umps										#
+#											#
+# Per cancellare i file compilati è necessario avviare il seguente comando :		#
+#											#
+#	$ make clean									#
+#											#
+# Per consultare la documentazione completa è possibile eseguire il seguente comando :	#
+#											#
+#	$ make doc									#
+#											#
+# E' possibile leggere la documentazione aprendo col proprio web browser il file :	#
+#											#
+#	./doc/html/index.html								#
+#											#
+# Per generare la documentazione è necessario disporre del programma Doxygen		#
+# reperibile all'indirizzo :								#
+#											#
+#	www.doxygen.org									#
+#											#
+# Per le distribuzioni Linux come Debian/Ubuntu è possibile reperire tale programma	#
+# dai propri repository avviando il seguente comando :					#
+#											#
+#	$ (sudo) apt-get install doxygen						#
+#											#
+#########################################################################################
